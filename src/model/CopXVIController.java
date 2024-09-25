@@ -1,15 +1,22 @@
 package model;
 
+import java.util.Date;
+import java.time.LocalDate;
+
 /**
  * The CopXVIController class represents a controller for managing routes in the COP XVI system.
  */
 public class CopXVIController {
-    // atributos
+    // Attributes
     private String sponsor;
     private String country;
-    // relaciones
+    // Constants
+    public static final int MAX_ROUTES = 5;
+    public static final int MAX_DEPARTMENTS = 5;
+    public static final int MAX_BIODIVERSE_PLACES_PER_DEPARTMENT = 30;
+    // Relations
     private Route[] routes;
-    
+    private Department[] departments;
     /**
      * Constructor method.
      * @param sponsor the sponsor of the COP XVI system
@@ -20,18 +27,7 @@ public class CopXVIController {
     public CopXVIController(String sponsor, String country) {
         this.sponsor = sponsor;
         this.country = country;
-        routes = new Route[5];
-        addRoutesDefault();
-    }
-    
-    /**
-     * Add default routes to the controller.
-     * <b>post:</b> The routes are added to the controller. <br>
-     */
-    public void addRoutesDefault() {
-        routes[0] = new Route("Ruta 1", "Calle 1", "10:00 am", "12:00 pm");
-        routes[1] = new Route("Ruta 2", "Calle 2", "11:00 am", "1:00 pm");
-        routes[2] = new Route("Ruta 3", "Calle 3", "12:00 pm", "2:00 pm");
+        departments = new Department[5];
     }
     
     /**
@@ -73,6 +69,51 @@ public class CopXVIController {
         }
         if (added) message = "La ruta ha sido agregada exitosamente en el sistema";
         else message = "No se puede agregar la ruta, el sistema está lleno";
+        return message;
+    }
+
+    public boolean searchDepartment(String name) {
+        for (int i = 0; i < departments.length; i++) {
+            if (departments[i] != null && departments[i].getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public String addDepartment(String name) {
+        String message;
+        boolean added = false;
+        for (int i = 0; i < departments.length; i++) {
+            if (departments[i] == null) {
+                departments[i] = new Department(name);
+                added = true;
+            }
+        }
+        if (added) message = "El departamento ha sido agregado exitosamente en el sistema";
+        else message = "No se puede agregar el departamento, el sistema está lleno";
+        return message;
+    }
+    public String addBiodiversePlace(String name, double area, String photo, int inagurationDay, int inagurationMonth, int inagurationYear, double requiredFunding, String departmentName) {
+        // Search the department
+        Department department = null;
+        for (int i = 0; i < departments.length; i++) {
+            if (departments[i] != null && departments[i].getName().equals(departmentName)) {
+                department = departments[i];
+            }
+        }
+        if (department == null) {
+            return "No se puede agregar el lugar biodiverso, el departamento no existe";
+        }
+        Date inagurationDate = new Date(inagurationYear, inagurationMonth, inagurationDay);
+        // Add the biodiverse place
+        String message = department.addBioDiversePlace(departmentName, area, photo, inagurationDate, requiredFunding);
+        return message;
+    }
+    public String showBiodiversePlaces() {
+        String message = "";
+        BiodiversePlace[] biodiversePlaces = new BiodiversePlace[30*5];
+        // Get all the biodiverse places
+        for (int i = 0; i < )
         return message;
     }
 

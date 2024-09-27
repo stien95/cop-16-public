@@ -9,7 +9,8 @@ public class BiodiversePlace {
     private Date inaugurationDate;
     private double requiredFunding;
     private Department department;
-    // caretakerCommunity, residentSpecies.
+    private Community caretakerCommunity;
+    private Specie[] species;
 
     public BiodiversePlace(String name, double area, String photo, Date inaugurationDate, double requiredFunding,
             Department department) {
@@ -69,9 +70,30 @@ public class BiodiversePlace {
         this.department = department;
     }
 
+    String addCaretakerCommunity(Community caretakerCommunity) {
+        String message = "Ya existe una comunidad encargada de este lugar biodiverso";
+        if (this.caretakerCommunity == null) {
+            this.caretakerCommunity = caretakerCommunity;
+            message = "Comunidad asignada como encargada del lugar biodiverso";
+        }
+        return message;
+    }
+    @Override
     public String toString() {
-        return "Lugar biodiverso: " + name + "\nArea: " + area + "\nFecha de inauguración: "
+        String message = "Lugar biodiverso: " + name + "\nArea: " + area + "\nFecha de inauguración: "
                 + inaugurationDate.toString()
                 + "\nFinanciamiento requerido: " + requiredFunding + "\nDepartamento: " + department.getName();
+        if (caretakerCommunity != null) {
+            message += "\nComunidad encargada: " + caretakerCommunity.getName();
+        }
+        if (species.length > 0) {
+            message += "\nEspecies: ";
+            for (int i = 0; i < species.length; i++) {
+                if (species[i] != null) {
+                    message += species[i].getName() + ", ";
+                }
+            }
+        }
+        return message;
     }
 }

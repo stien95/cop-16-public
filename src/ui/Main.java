@@ -88,6 +88,32 @@ public class Main {
         String msg = copXVIController.associatePlacesToRoute(routeName, biodiversePlaceName);
         System.out.println(msg);
     }
+    public static void addCommunity() {
+        System.out.print("Ingrese el nombre de la comunidad: ");
+        String name = sc.nextLine();
+        System.out.print("Ingrese el tipo de comunidad (afro, raizal, indigena): ");
+        String type = sc.nextLine();
+        System.out.print("Ingrese el nombre del representante de la comunidad: ");
+        String representativeName = sc.nextLine();
+        System.out.print("Ingrese el número de teléfono del representante de la comunidad: ");
+        String representativePhoneNumber = sc.nextLine();
+        System.out.print("Ingrese el número de problemas de la comunidad: ");
+        int problemsCount = sc.nextInt();
+        sc.nextLine();
+        String[] problems = new String[problemsCount];
+        for (int i = 0; i < problemsCount; i++) {
+            System.out.print("Ingrese el problema " + (i + 1) + " de la comunidad: ");
+            problems[i] = sc.nextLine();
+        }
+        System.out.print("Ingrese la población de la comunidad: ");
+        int population = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Ingre el nombre del lugar biodiverso que protege la comunidad: ");
+        String biodiversePlaceName = sc.nextLine();
+        String message = copXVIController.addCommunity(name, type, representativeName, representativePhoneNumber, problems,
+                population, biodiversePlaceName);
+        System.out.println(message);
+    }
 
     public static void printMenu() {
         System.out.println("-------------MENÚ-------------");
@@ -99,7 +125,11 @@ public class Main {
         System.out.println(
                 "6. Para consultar el departamento con que tiene más lugares con diversidad biológica registrados hasta el momento");
         System.out.println("7. Asociar lugares a ruta");
-        System.out.println("8. Salir");
+        System.out.println("8. Agregar comunidad");
+        System.out.println("10. [No implemented] Ingresar una especie a un lugar.");
+        System.out.println("11. [No implemented] Modificar los datos de la especie en un lugar.");
+        System.out.println("12. [No implemented] Creación de casos de prueba.");
+        System.out.println("9. Salir");
         System.out.print("Ingrese la opción deseada: ");
     }
 
@@ -133,6 +163,11 @@ public class Main {
                     associatePlacesToRoute();
                     break;
                 case 8:
+                    addCommunity();
+                    break;
+                case 9:
+                    break;
+                case 10:
                     sc.close();
                     return;
                 default:

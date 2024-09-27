@@ -221,7 +221,38 @@ public class CopXVIController {
         message = route.addPlaceToRoute(place);
         return message;
     }
-
+    public String addCommunity(String name, String type, String representativeName, String representativePhoneNumber,
+            String[] problems, int population, String biodiversePlaceName) {
+        String message;
+        
+        if ()
+        CommunityRepresentative representative = new CommunityRepresentative(representativeName,
+                representativePhoneNumber);
+        CommunityProblem[] communityProblems = new CommunityProblem[problems.length];
+        for (int i = 0; i < problems.length; i++) {
+            if (problems[i].equalsIgnoreCase("hospital")) {
+                communityProblems[i] = CommunityProblem.LACK_OF_HOSPITAL;
+            }
+            if (problems[i].equalsIgnoreCase("escuela")) {
+                communityProblems[i] = CommunityProblem.LACK_OF_SCHOOL;
+            }
+            if (problems[i].equalsIgnoreCase("agua potable")) {
+                communityProblems[i] = CommunityProblem.LACK_OF_POTABLE_WATER;
+            if (problems[i].equalsIgnoreCase("alimentos basicos")) {
+                communityProblems[i] = CommunityProblem.LACK_OF_BASIC_FOOD;
+            
+        }
+        Community community = new Community(name, communityType, representative, communityProblems, population);
+        // Add the community to the biodiverse place
+        BiodiversePlace biodiversePlace = searchBiodiversePlace(biodiversePlaceName);
+        if (biodiversePlace == null) {
+            message = "No se puede agregar la comunidad, el lugar biodiverso no existe";
+        } else {
+            message = biodiversePlace.addCaretakerCommunity(community);
+        }
+        message = "La comunidad ha sido agregada exitosamente en el sistema";
+        return message;
+    }
     // Getters and Setters
     public String getSponsor() {
         return sponsor;

@@ -37,18 +37,22 @@ public class Department {
         }
         return false;
     }
-    public String addBioDiversePlace(String name, double area, String photo, Date inagurationDate, double requiredFunding) {
+
+    public String addBioDiversePlace(String name, double area, String photo, Date inaugurationDate,
+            double requiredFunding) {
         String message;
         boolean added = false;
         // Verify if the biodiverse place can be added
         for (int i = 0; i < biodiversePlaces.length; i++) {
             if (biodiversePlaces[i] == null) {
-                biodiversePlaces[i] = new BiodiversePlace(name, area, photo, inagurationDate, requiredFunding, this);
+                biodiversePlaces[i] = new BiodiversePlace(name, area, photo, inaugurationDate, requiredFunding, this);
                 added = true;
             }
         }
-        if (added) message = "El lugar biodiverso ha sido agregado exitosamente en el sistema";
-        else message = "No se puede agregar el lugar biodiverso, el sistema está lleno";
+        if (added)
+            message = "El lugar biodiverso ha sido agregado exitosamente en el sistema";
+        else
+            message = "No se puede agregar el lugar biodiverso, el sistema está lleno";
         return message;
     }
 }

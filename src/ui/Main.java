@@ -7,6 +7,7 @@ import model.CopXVIController;
 public class Main {
     public static CopXVIController copXVIController;
     public static Scanner sc;
+
     /**
      * Add a route to the controller and show a message
      * with the result of the operation.
@@ -25,25 +26,28 @@ public class Main {
         String msg = copXVIController.addRoute(name, address, startTime, endTime);
         System.out.println(msg);
     }
+
     /**
      * Initialize the controller with the sponsor and country
      * entered by the user.
      * <b>pre:</b> The controller is null. <br>
      * <b>post:</b> The controller is initialized. <br>
      */
-    public static void makeController() {
+    public static void initController() {
         System.out.print("Ingrese el nombre del patrocinador de la cop-16: ");
         String sponsor = sc.nextLine();
         System.out.print("Ingrese el país de la cop-16: ");
         String country = sc.nextLine();
         copXVIController = new CopXVIController(sponsor, country);
     }
+
     public static void addDepartment() {
         System.out.print("Ingrese el nombre del departamento: ");
         String name = sc.nextLine();
         String msg = copXVIController.addDepartment(name);
         System.out.println(msg);
     }
+
     public static void addBiodiversePlace() {
         System.out.print("Ingrese el nombre del lugar biodiverso: ");
         String name = sc.nextLine();
@@ -53,22 +57,29 @@ public class Main {
         System.out.print("Ingrese el diretorio de la foto del lugar biodiverso (imagenes/foto1.jpg): ");
         String photo = sc.nextLine();
         System.out.print("Ingrese el número de día de la inaguración (DD): ");
-        int inagurationDay = sc.nextInt();
+        int inaugurationDay = sc.nextInt();
         System.out.print("Ingrese el número de mes de la inaguración (MM): ");
-        int inagurationMonth = sc.nextInt();
+        int inaugurationMonth = sc.nextInt();
         System.out.print("Ingrese el número de año de la inaguración (AAAA): ");
-        int inagurationYear = sc.nextInt();
+        int inaugurationYear = sc.nextInt();
         System.out.print("Ingrese el financiamiento requerido del lugar biodiverso en pesos: ");
         double requiredFunding = sc.nextDouble();
         sc.nextLine();
         System.out.print("Ingrese el nombre del departamento del lugar biodiverso: ");
         String departmentName = sc.nextLine();
-        String msg = copXVIController.addBiodiversePlace(name, area, photo, inagurationDay, inagurationMonth, inagurationYear , requiredFunding, departmentName);
+        String msg = copXVIController.addBiodiversePlace(name, area, photo, inaugurationDay, inaugurationMonth,
+                inaugurationYear, requiredFunding, departmentName);
         System.out.println(msg);
     }
+
     public static void showBiodiversePlaces() {
         System.out.println(copXVIController.showBiodiversePlaces());
     }
+
+    public static void findMostBiodiverseDepartment() {
+        System.out.println(copXVIController.findMostBiodiverseDepartment());
+    }
+
     public static void printMenu() {
         System.out.println("-------------MENÚ-------------");
         System.out.println("1. Agregar ruta");
@@ -76,13 +87,15 @@ public class Main {
         System.out.println("3. Agregar departamento");
         System.out.println("4. Agregar lugar biodiverso");
         System.out.println("5. Para consultar los lugares ordenados de menor a mayor con respecto al área");
-        System.out.println("6. Para consultar el departamento con que tiene más lugares con diversidad biológica registrados hasta el momento");
-        System.out.println("6. Salir");
+        System.out.println(
+                "6. Para consultar el departamento con que tiene más lugares con diversidad biológica registrados hasta el momento");
+        System.out.println("7. Salir");
         System.out.print("Ingrese la opción deseada: ");
     }
+
     public static void main(String[] args) {
         sc = new Scanner(System.in);
-        makeController();
+        initController();
         while (true) {
             printMenu();
             int option = sc.nextInt();
@@ -101,6 +114,12 @@ public class Main {
                     addBiodiversePlace();
                     break;
                 case 5:
+                    showBiodiversePlaces();
+                    break;
+                case 6:
+                    findMostBiodiverseDepartment();
+                    break;
+                case 7:
                     sc.close();
                     return;
                 default:

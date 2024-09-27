@@ -80,6 +80,15 @@ public class Main {
         System.out.println(copXVIController.findMostBiodiverseDepartment());
     }
 
+    public static void associatePlacesToRoute() {
+        System.out.print("Ingrese el nombre de la ruta: ");
+        String routeName = sc.nextLine();
+        System.out.print("Ingrese el nombre del lugar biodiverso: ");
+        String biodiversePlaceName = sc.nextLine();
+        String msg = copXVIController.associatePlacesToRoute(routeName, biodiversePlaceName);
+        System.out.println(msg);
+    }
+
     public static void printMenu() {
         System.out.println("-------------MENÚ-------------");
         System.out.println("1. Agregar ruta");
@@ -89,7 +98,8 @@ public class Main {
         System.out.println("5. Para consultar los lugares ordenados de menor a mayor con respecto al área");
         System.out.println(
                 "6. Para consultar el departamento con que tiene más lugares con diversidad biológica registrados hasta el momento");
-        System.out.println("7. Salir");
+        System.out.println("7. Asociar lugares a ruta");
+        System.out.println("8. Salir");
         System.out.print("Ingrese la opción deseada: ");
     }
 
@@ -120,6 +130,9 @@ public class Main {
                     findMostBiodiverseDepartment();
                     break;
                 case 7:
+                    associatePlacesToRoute();
+                    break;
+                case 8:
                     sc.close();
                     return;
                 default:
